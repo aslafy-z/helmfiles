@@ -81,10 +81,29 @@ releases:
           path: /metrics
           interval: 60s
           scrapeTimeout: 30s
+      image:
+        {{- with index .Values "controller_image_repository" }}
+        repository: {{ quote . }}
+        {{- end }}
+        {{- with index .Values "controller_image_tag" }}
+        tag: {{ quote . }}
+        {{- end }}
       webhook:
         enabled: true
+        {{- with index .Values "webhook_image_repository" }}
+        repository: {{ quote . }}
+        {{- end }}
+        {{- with index .Values "webhook_image_tag" }}
+        tag: {{ quote . }}
+        {{- end }}
       cainjector:
         enabled: true
+        {{- with index .Values "cainjector_image_repository" }}
+        repository: {{ quote . }}
+        {{- end }}
+        {{- with index .Values "cainjector_image_tag" }}
+        tag: {{ quote . }}
+        {{- end }}
       resources:
         limits:
           cpu: {{ .Values.limit_cpu | quote }}
